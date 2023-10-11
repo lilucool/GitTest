@@ -146,6 +146,8 @@ public class Scriptings : MonoBehaviour
 
     public void OnGUI()
     {
+
+  
         //     var e: Event = Event.current;
         Event e = Event.current;
         //       // Create style for a button
@@ -162,17 +164,12 @@ public class Scriptings : MonoBehaviour
 
         if (LandingP)
         {
-
-            //     if (FirstStart) {
-           
             if (FirstStart)
             {
-                //        
-
+             
                 mode = 1;
             }
-            //     }
-            //     else {
+           
             else
             {
 
@@ -181,16 +178,14 @@ public class Scriptings : MonoBehaviour
                 //  myButtonStyle.hover.textColor = Color.red;
 
                 GUI.skin.box.fontSize = Screen.width / 20;
-                //        
                 GUI.skin.button.fontSize = Screen.width / 20;
-                //        
                 GUI.skin.box.alignment = TextAnchor.MiddleCenter;
                 //         // show message;
                 //         GUI.Box(Rect(((Screen.width - Screen.width / 4) / 2), (Screen.height / 4), (Screen.width / 4), (Screen.width / 10)), message2show);
 
                 //   GUI.Box(new Rect(((Screen.width - Screen.width / 4) / 2), (Screen.height / 4), (Screen.width / 4), (Screen.width / 10)), message2show);
 
-
+                //message info window
                 GUI.Box(new Rect(((Screen.width - Screen.width / 4) / 2), (Screen.height / 4), (Screen.width / 4), (Screen.width / 10)), message2show, myButtonStyle);
                 //         if (engineStatus == 1) { engineStatus = 2; }
                 if (engineStatus == 1) { engineStatus = 2; }
@@ -241,6 +236,7 @@ public class Scriptings : MonoBehaviour
             c1.enabled = false;
             c2.enabled = false;
             if (GUI.Button(new Rect(((Screen.width - Screen.width / 4) / 2), (Screen.height / 4), (Screen.width / 4), (Screen.width / 10)), "开始游戏", myButtonStyle2)) { LandingP = true; showButton = false; ActivateCamera(true); }
+            if (GUI.Button(new Rect(((Screen.width - Screen.width / 4) / 2), (Screen.height / 4 + Screen.width / 10), (Screen.width / 4), (Screen.width / 10)), "单机双人", myButtonStyle2)) { LandingP = true; showButton = false; ActivateCamera(true); }
 
         }
     }
