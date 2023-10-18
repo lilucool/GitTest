@@ -15,11 +15,10 @@ public class Scriptings : MonoBehaviour
 
     // var Name = "Various javascripts";
     public string Name = "Various javascripts";
-    // var FirstStart = true;
-
+  
     public bool LandingP = false;
     public bool FirstStart = true;
-    // var drawAnim = false;						// Animation /or fastest visual performance by redrawing...
+   						// Animation /or fastest visual performance by redrawing...
     public bool drawAnim = true;
     // var toPromote = 0;						// Promotion option (0-Q,1-R,2-B,3-N)...
     public int toPromote = 0;
@@ -35,6 +34,7 @@ public class Scriptings : MonoBehaviour
     // var engineStatus = 0;
     public string answer_plane = "";                 //Leo 回棋的坐标
     public string message2show = "";
+
     public int engineStatus = 0;
     // var gameover = false;						// is true when the game is over...
     public bool gameover = false;
@@ -167,7 +167,7 @@ public class Scriptings : MonoBehaviour
             if (FirstStart)
             {
              
-                mode = 1;
+             //   mode = 1;
             }
            
             else
@@ -184,7 +184,7 @@ public class Scriptings : MonoBehaviour
                 //         GUI.Box(Rect(((Screen.width - Screen.width / 4) / 2), (Screen.height / 4), (Screen.width / 4), (Screen.width / 10)), message2show);
 
                 //   GUI.Box(new Rect(((Screen.width - Screen.width / 4) / 2), (Screen.height / 4), (Screen.width / 4), (Screen.width / 10)), message2show);
-
+               // Debug.Log(message2show);
                 //message info window
                 GUI.Box(new Rect(((Screen.width - Screen.width / 4) / 2), (Screen.height / 4), (Screen.width / 4), (Screen.width / 10)), message2show, myButtonStyle);
                 //         if (engineStatus == 1) { engineStatus = 2; }
@@ -235,8 +235,8 @@ public class Scriptings : MonoBehaviour
 
             c1.enabled = false;
             c2.enabled = false;
-            if (GUI.Button(new Rect(((Screen.width - Screen.width / 4) / 2), (Screen.height / 4), (Screen.width / 4), (Screen.width / 10)), "开始游戏", myButtonStyle2)) { LandingP = true; showButton = false; ActivateCamera(true); }
-            if (GUI.Button(new Rect(((Screen.width - Screen.width / 4) / 2), (Screen.height / 4 + Screen.width / 10), (Screen.width / 4), (Screen.width / 10)), "单机双人", myButtonStyle2)) { LandingP = true; showButton = false; ActivateCamera(true); }
+            if (GUI.Button(new Rect(((Screen.width - Screen.width / 4) / 2), (Screen.height / 4), (Screen.width / 4), (Screen.width / 10)), "开始游戏", myButtonStyle2)) { LandingP = true; showButton = false; ActivateCamera(true);mode = 1; }
+            if (GUI.Button(new Rect(((Screen.width - Screen.width / 4) / 2), (Screen.height / 4 + Screen.width / 10), (Screen.width / 4), (Screen.width / 10)), "单机双人", myButtonStyle2)) { LandingP = true; showButton = false; ActivateCamera(true); mode = 2; }
 
         }
     }
@@ -392,11 +392,17 @@ public class Scriptings : MonoBehaviour
         //     else {
         else
         {
+
+            
             //         if (mode == 2) {
             if (mode == 2)
             {
-             
-               
+
+             //   Debug.Log("else mode == 2");
+              //  Debug.Log("setCamSide"+ setCamSide);
+              //  Debug.Log("setCamSide2" + setCamSide2);
+              //  Debug.Log("c1.enabled" + c1.enabled);
+             //   Debug.Log("c2.enabled" + c2.enabled);
                 //             if ((!c1.enabled) && setCamSide && white == "w") { setCamSide2 = false; c1.enabled = true; c2.enabled = false; }
                 if ((!c1.enabled) && setCamSide && white == "w") { setCamSide2 = false; c1.enabled = true; c2.enabled = false; }
                 //             if ((!c2.enabled) && setCamSide2 && white != "w") { setCamSide = false; c2.enabled = true; c1.enabled = false; }
@@ -478,7 +484,8 @@ public class Scriptings : MonoBehaviour
                 if (at.Length > 0)
                 {
                     //                 if (C0.c0_side < 0) at = Revert_at(at);
-                   
+                    //function MouseMovement()
+                   // Debug.Log("function MouseMovement_c0_side= " + C0.c0_side);
                     if (C0.c0_side < 0) at = Revert_at(at);
                     //             }
                 }
@@ -518,10 +525,7 @@ public class Scriptings : MonoBehaviour
                 {
 
                    // Debug.Log("DragDetect");
-
-                   
-
-                    //                 var at = "";
+                   //var at = "";
                     string at = "";
                     //                 for (var h = 0; h < 8; h++)
                     for (var h = 0; h < 8; h++)
@@ -541,8 +545,6 @@ public class Scriptings : MonoBehaviour
                     if (at.Length > 0)
                     {
 
-                      
-
                         //                     if (C0.c0_side < 0) at = Revert_at(at);
                         if (C0.c0_side < 0) at = Revert_at(at);
                         //                     if (drag1_at.Length > 0) {
@@ -559,8 +561,11 @@ public class Scriptings : MonoBehaviour
                         //                     var piecedrag = C0.c0_D_what_at(at);
                         var piecedrag = C0.c0_D_what_at(at);
                         //                     if (mode == 2) {
+
+                        Debug.Log("DragDetect mode==2");
                         if (mode == 2)
                         {
+                            Debug.Log("DragDetect mode==2");
                             //                         if ((piecedrag.Length > 0 && piecedrag.Substring(0, 1) == ((C0.c0_side > 0) ? white : black))) {   // <- player vs player: white:black
                             if ((piecedrag.Length > 0 && piecedrag.Substring(0, 1) == ((C0.c0_side > 0) ? white : black)))
                             {   // <- player vs player: white:black
@@ -600,13 +605,16 @@ public class Scriptings : MonoBehaviour
                                     //                                 C0.c0_move_to(drag1_at, at);
                                     C0.c0_move_to(drag1_at, at);
                                     //                                 C0.c0_sidemoves = -C0.c0_sidemoves;
+
+                                    Debug.Log("C0.c0_sidemoves= "+C0.c0_sidemoves);
                                     C0.c0_sidemoves = -C0.c0_sidemoves;
+                                   // C0.c0_side = -C0.c0_side;
                                     //                                 temp = white;
                                     temp = white;
                                     //                                 white = black;
-                                    white = black;
+                                   white = black;
                                     //                                 black = temp;
-                                    black = temp;
+                                   black = temp;
 
                                     //                                 hide = true;
                                     hide = true;
@@ -622,15 +630,25 @@ public class Scriptings : MonoBehaviour
                                     //                                     setCamSide = false;
                                     //                                     setCamSide2 = true;
                                     //                                 }
-                                    if (white == "w")
+
+
+                                    //Debug.Log("C0.c0_sidemoves= "+C0.c0_sidemoves);
+                                    if (C0.c0_sidemoves == 1)
                                     {
-                                        message2show = "轮到白方!";
+                                       // Debug.Log("white==w");
+                                       // Debug.Log("white" + white);
+                                       Debug.Log("if sidemoves == 1");
+                                       // message2show = white+"轮到白方!";
                                         setCamSide = true;
                                         setCamSide2 = false;
                                     }
                                     else
                                     {
-                                        message2show = "轮到黑方!";
+                                        // Debug.Log("white==w else");
+                                        // Debug.Log("white" + white);
+                                        // Debug.Log("message2show" + message2show);
+                                        Debug.Log("if sidemoves == -1");
+                                      
                                         setCamSide = false;
                                         setCamSide2 = true;
                                     }
@@ -1115,7 +1133,9 @@ public class Scriptings : MonoBehaviour
         }
         if (mode == 2)
         {
-            if (C0.c0_side > 0) message2show = menuArr[lang_flag, 22];
+            //Debug.Log(menuArr[lang_flag, 22]);
+           // Debug.Log("C0.c0_side"+C0.c0_side);
+            if (C0.c0_sidemoves > 0) message2show = menuArr[lang_flag, 22];
             else message2show = menuArr[lang_flag, 21];
         }
 
@@ -1235,10 +1255,10 @@ public class Scriptings : MonoBehaviour
                     else
                     {
                         C0.c0_take_back();
-                        temp = white;
-                        white = black;
-                        black = temp;
-                        TakeBackFlag = false;
+                      //  temp = white;
+                      //  white = black;
+                      //  black = temp;
+                      //  TakeBackFlag = false;
                         if (white == "w") { setCamSide = true; setCamSide2 = false; }
                         if (white != "w") { setCamSide = false; setCamSide2 = true; }
                     }
@@ -1257,14 +1277,14 @@ public class Scriptings : MonoBehaviour
                 }
                 else if (mode == 2)
                 {
-                    if (C0.c0_side == 1) message2show = "轮到白方!";
-                    else message2show = "轮到黑方!";
+                    if (C0.c0_side == 1) { message2show = "轮到白方!"; }
+                    else { message2show = "轮到黑方!"; }
                     C0.c0_set_start_position("");
                     C0.c0_sidemoves = 1;
                     C0.c0_waitmove = true;
-                    white = "w";
-                    black = "b";
-                    temp = "";
+                 //   white = "w";
+                 //   black = "b";
+                 //   temp = "";
                     setCamSide = true; setCamSide2 = false;
                     NewGameFlag = false;
                 }
