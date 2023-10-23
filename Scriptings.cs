@@ -404,13 +404,14 @@ public class Scriptings : MonoBehaviour
                         //                     if (drag1_at.Length > 0) {
                         if (drag1_at.Length > 0)
                         {
-                           // Debug.Log("drag1_at=" + drag1_at);
+
                             //                         q2Obj = GameObject.Find("plane_" + ((C0.c0_side < 0) ? Revert_at(drag1_at) : drag1_at));
+                            
                             q2Obj = GameObject.Find("plane_" + ((C0.c0_side < 0) ? Revert_at(drag1_at) : drag1_at));
                             //                         if (!(q2Obj == null)) q2Obj.GetComponent.< Renderer > ().enabled=false;
 
-                            Debug.Log("false_drag1_at="+drag1_at);
-                            Debug.Log("false");
+                            Debug.Log("plane_" + ((C0.c0_side < 0) ? Revert_at(drag1_at) : drag1_at));
+                            
                             if (!(q2Obj == null)) q2Obj.GetComponent<Renderer>().enabled = false;
                             //                     }
                         }
@@ -496,7 +497,7 @@ public class Scriptings : MonoBehaviour
                                     //                                 if (!(q3Obj == null)) q3Obj.GetComponent.< Renderer > ().enabled=true;
                                     //White squares appear underneath the chess piece
                                     if (!(q3Obj == null)) q3Obj.GetComponent<Renderer>().enabled = true;
-                                    DisplayPlane();
+                                    //DisplayPlane();
                                 }
                             }
                             else
