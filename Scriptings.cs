@@ -23,6 +23,7 @@ public class Scriptings : MonoBehaviour
     // var drag1_at = "";								// square with a piece dragged after the first drag...
     // var drag1_animator: int = 0;						// On drag start animation -counter
     public string drag1_at = "";
+    public string at = "";
     public int drag1_animator = 0;
     // var move_animator: int = 2;					// Animation counter when a piece is moving...
     public int move_animator = 2;
@@ -380,13 +381,15 @@ public class Scriptings : MonoBehaviour
                 if (C0.c0_waitmove)
                 {
 
-                    // Debug.Log("DragDetect");
-                    string at = "";
+                 
+                   
                     for (var h = 0; h < 8; h++)
                         for (var v = 8; v > 0; v--)
                         {
                             var id = "plane_" + System.Convert.ToChar(System.Convert.ToInt32("a"[0]) + h) + v.ToString();
+                            //Debug.Log("id=" + id);
                             var qObj = GameObject.Find(id);
+
                             if ((!(qObj == null)) && (qObj.transform.position == hit.rigidbody.position)) at = id.Substring(6, 2);
                             //                     }
                         }
@@ -401,12 +404,14 @@ public class Scriptings : MonoBehaviour
                         //                     if (drag1_at.Length > 0) {
                         if (drag1_at.Length > 0)
                         {
-                            Debug.Log("drag1_at=" + drag1_at);
+                           // Debug.Log("drag1_at=" + drag1_at);
                             //                         q2Obj = GameObject.Find("plane_" + ((C0.c0_side < 0) ? Revert_at(drag1_at) : drag1_at));
                             q2Obj = GameObject.Find("plane_" + ((C0.c0_side < 0) ? Revert_at(drag1_at) : drag1_at));
                             //                         if (!(q2Obj == null)) q2Obj.GetComponent.< Renderer > ().enabled=false;
-                            if (!(q2Obj == null)) q2Obj.GetComponent<Renderer>().enabled = false;
 
+                            Debug.Log("false_drag1_at="+drag1_at);
+                            Debug.Log("false");
+                            if (!(q2Obj == null)) q2Obj.GetComponent<Renderer>().enabled = false;
                             //                     }
                         }
 
@@ -414,7 +419,7 @@ public class Scriptings : MonoBehaviour
                         var piecedrag = C0.c0_D_what_at(at);
                         //                     if (mode == 2) {
 
-                        Debug.Log("piecedrag=" + piecedrag);
+                        //Debug.Log("piecedrag=" + piecedrag);
                         if (mode == 2)
                         {
                             if ((piecedrag.Length > 0 && piecedrag.Substring(0, 1) == ((C0.c0_side > 0) ? white : black)))
@@ -431,9 +436,7 @@ public class Scriptings : MonoBehaviour
                             }
                             else
                             {
-
-                               
-                                //                             Piece2promote = "Q";
+//                             Piece2promote = "Q";
                                 Piece2promote = "Q";
                                 //                             if (toPromote == 1) Piece2promote = "R";
                                 if (toPromote == 1) Piece2promote = "R";
@@ -447,7 +450,7 @@ public class Scriptings : MonoBehaviour
 
                                 if ((drag1_at.Length > 0) && C0.c0_D_can_be_moved(drag1_at, at))
                                 {
-                                    Debug.Log("at=" + at);
+                                   // Debug.Log("at=" + at);
                                     q40bj = GameObject.Find("plane_" + ((C0.c0_side < 0) ? Revert_at(at) : at));
                                     //                                 if (!(q3Obj == null)) q3Obj.GetComponent.< Renderer > ().enabled=true;
                                     //White squares appear underneath the chess piece
@@ -473,8 +476,7 @@ public class Scriptings : MonoBehaviour
                                         setCamSide2 = true;
                                     }
                                 }
-                                //                             }
-                                //                         }
+                          
                             }
                             //                     }
                         }
@@ -494,6 +496,7 @@ public class Scriptings : MonoBehaviour
                                     //                                 if (!(q3Obj == null)) q3Obj.GetComponent.< Renderer > ().enabled=true;
                                     //White squares appear underneath the chess piece
                                     if (!(q3Obj == null)) q3Obj.GetComponent<Renderer>().enabled = true;
+                                    DisplayPlane();
                                 }
                             }
                             else
