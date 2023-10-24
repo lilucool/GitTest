@@ -321,7 +321,7 @@ public class Scriptings : MonoBehaviour
             {
                 //             var at = "";
 
-                string at = "";
+                //string at = "";
                 //             for (var h = 0; h < 8; h++)
                 for (var h = 0; h < 8; h++)
                     //                 for (var v = 8; v > 0; v--) {
@@ -365,8 +365,8 @@ public class Scriptings : MonoBehaviour
 
         GameObject q2Obj;
         GameObject q3Obj;
-
         GameObject q40bj;
+
         string Piece2promote;
         //     // Make sure the user pressed the mouse down
         if (!Input.GetMouseButtonDown(0)) return;
@@ -380,9 +380,9 @@ public class Scriptings : MonoBehaviour
                 //             if (C0.c0_waitmove) {	// If waiting for action only...
                 if (C0.c0_waitmove)
                 {
-
-                 
                    
+
+
                     for (var h = 0; h < 8; h++)
                         for (var v = 8; v > 0; v--)
                         {
@@ -390,8 +390,16 @@ public class Scriptings : MonoBehaviour
                             //Debug.Log("id=" + id);
                             var qObj = GameObject.Find(id);
 
-                            if ((!(qObj == null)) && (qObj.transform.position == hit.rigidbody.position)) at = id.Substring(6, 2);
+                            if ((!(qObj == null)) && (qObj.transform.position == hit.rigidbody.position)) 
+                            {
+                               
+                                Debug.Log("at="+at);
+                                at = id.Substring(6, 2);
+                               
+
+                            } 
                             //                     }
+                            //Debug.Log("at=" + at); mouse click place coordinate
                         }
 
                     //                 if (at.Length > 0) {
@@ -422,10 +430,16 @@ public class Scriptings : MonoBehaviour
 
                         //Debug.Log("piecedrag=" + piecedrag);
                         if (mode == 2)
+                        
+
                         {
                             if ((piecedrag.Length > 0 && piecedrag.Substring(0, 1) == ((C0.c0_side > 0) ? white : black)))
                             {   // <- player vs player: white:black
 
+
+
+
+                              
                                 if (drag1_animator == 0)
                                 {
                                     drag1_at = at;
@@ -451,11 +465,13 @@ public class Scriptings : MonoBehaviour
 
                                 if ((drag1_at.Length > 0) && C0.c0_D_can_be_moved(drag1_at, at))
                                 {
-                                   // Debug.Log("at=" + at);
-                                    q40bj = GameObject.Find("plane_" + ((C0.c0_side < 0) ? Revert_at(at) : at));
-                                    //                                 if (!(q3Obj == null)) q3Obj.GetComponent.< Renderer > ().enabled=true;
+                                   
+
+                                    
+                                    //q40bj = GameObject.Find("plane_" + ((C0.c0_side < 0) ? Revert_at(at) : at));
+                                    //if (!(q3Obj == null)) q3Obj.GetComponent.< Renderer > ().enabled=true;
                                     //White squares appear underneath the chess piece
-                                    if (!(q40bj == null)) q40bj.GetComponent<Renderer>().enabled = true;
+                                    //if (!(q40bj == null)) q40bj.GetComponent<Renderer>().enabled = true;
                                     C0.c0_move_to(drag1_at, at);
                                   
                                     C0.c0_sidemoves = -C0.c0_sidemoves;
@@ -679,6 +695,19 @@ public class Scriptings : MonoBehaviour
     void DisplayPlane()
     {
         if (mode == 2) {
+
+
+            for (var h = 0; h < 8; h++)
+                for (var v = 8; v > 0; v--)
+                {
+                    var id = "plane_" + System.Convert.ToChar(System.Convert.ToInt32("a"[0]) + h) + v.ToString();
+                    //Debug.Log("id=" + id);
+                    var qObj = GameObject.Find(id);
+                    if (!(qObj == null)) qObj.GetComponent<Renderer>().enabled = false;
+                   
+                    //                     }
+                    //Debug.Log("at=" + at); mouse click place coordinate
+                }
 
         }
         else {
