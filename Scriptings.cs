@@ -392,7 +392,8 @@ public class Scriptings : MonoBehaviour
 
                             if ((!(qObj == null)) && (qObj.transform.position == hit.rigidbody.position)) 
                             {
-                               
+                               var qtobj = GameObject.Find("plane_" + ((C0.c0_side < 0) ? Revert_at(at) : at));
+                                if (!(qtobj == null)) qtobj.GetComponent<Renderer>().enabled = false;
                                 Debug.Log("at="+at);
                                 at = id.Substring(6, 2);
                                
