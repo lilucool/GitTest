@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8" />
+        <body>
+            Hello
+            <button id='btnCreate'>New</button>
+            <script>
+                let clientId = null;
+                let ws = new WebSocket("ws://localhost:9090")
+
+
+                const btnCreate = document.getElementById("btnCreate");
+
+
+                ws.onmessage = message => {
+                    const response = JSON.parse(message.data);
+                    if (response.method === "connect") {
+                        clientId = response.clientId;
+                        console.log("Client id Set successfully " + clientId)
+                    }
+                    else {
+                        console.log(response)
+                    }
+                }
+
+                btnCreate.addEventListener("click", e => {
+
+                    const payLoad = {
+                        "method": "create",
+                        "clientId": clientId
+                    }
+
+                    ws.send(JSON.stringify(payLoad));
+
+                })
+            </script>
+        </body>
+    </head>
+</html>
