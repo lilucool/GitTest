@@ -1,41 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 
-    <head>
-        <meta charset="utf-8" />
-        <body>
-            Hello
-            <button id='btnCreate'>New</button>
-            <script>
-                let clientId = null;
-                let ws = new WebSocket("ws://localhost:9090")
+<head>
+    <meta charset="utf-8" />
+</head>
+<body>
+    Hello
+    <button id='btnCreate'>New</button>
+    <button id='btnJoin'>Join Game</button>
+    <input type='text' id='txtGameId'>
+    <!--<input type='text' id='text'>
+    <input type='button' value="发送" id='leoSend' onclick="send()"/>
+     -->
+    <script>
+       
+        let gameId = null;
+        let playerColor = null;
+        let clientHtmlId = null;
+        let ws = new WebSocket("ws://localhost:9090")
+
+        const btnCreate = document.getElementById("btnCreate");
+        const btnJoin = document.getElementById("btnJoin");
+        const txtGameId = document.getElementById("txtGameId");
+
+        ws.onmessage = message => {
+            const messageData = message.data;
+            console.log("message.data:" + messageData)
+            const response = JSON.parse(message.data);  //Javascript object
+
+            if (response.method === "connect") {
+                clientHtmlId = response.clientId;
+                console.log("Client id Set successfully " + clientHtmlId)
+            }
+
+            //create
+            if (response.method === "create") {
+                gameId = response.game.id;
+                console.log("game successfully created with id " + response.game.id + " with " + response.game.balls + " balls")
+            }
+            else {
+
+                // console.log("err"+response)
+            }
+
+        }
+
+        //wiring events
+        btnJoin.addEventListener("click", e => {
+
+            if (gameId === null)
+                gameId = txtGameId.value;
+
+            const payLoad = {
+                "method": "join",
+                "clientId": clientHtmlId,
+                "gameId": gameId
+            }
+            console.log("payLoad=" + payLoad);
+            ws.send(JSON.stringify(payLoad));
+
+        })
 
 
-                const btnCreate = document.getElementById("btnCreate");
+        btnCreate.addEventListener("click", e => {
 
+            const payLoad = {
+                "method": "create",
+                "clientId": clientHtmlId
+            }
 
-                ws.onmessage = message => {
-                    const response = JSON.parse(message.data);
-                    if (response.method === "connect") {
-                        clientId = response.clientId;
-                        console.log("Client id Set successfully " + clientId)
-                    }
-                    else {
-                        console.log(response)
-                    }
-                }
+            ws.send(JSON.stringify(payLoad));
 
-                btnCreate.addEventListener("click", e => {
+        })
 
-                    const payLoad = {
-                        "method": "create",
-                        "clientId": clientId
-                    }
+  
 
-                    ws.send(JSON.stringify(payLoad));
+        /*      function send() {
+                  let text = document.getElementById("text").value;
+                  ws.send(text)
 
-                })
-            </script>
-        </body>
-    </head>
+              }
+      */
+    </script>
+</body>
+   
 </html>
