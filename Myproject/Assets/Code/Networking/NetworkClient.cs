@@ -94,7 +94,7 @@ public class NetworkClient : SocketIOComponent
            
            
             string id = E.data["id"].ToString().RemoveQuotes();
-            Debug.Log(id);
+           // Debug.Log(id);
             float x = E.data["position"]["x"].f;
             float y = E.data["position"]["y"].f;
             //Debug.Log("updatePosition");

@@ -29,7 +29,7 @@ io.on('connection', function (socket) {
         player.position.x = data.position.x;
         player.position.y = data.position.y;
         socket.broadcast.emit('updatePosition', player);
-        socket.emit('updatePosition', player);
+        //socket.emit('updatePosition', player);
         console.log(player);
         //console.log('updatePosition');
     });
