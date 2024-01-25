@@ -8,6 +8,7 @@
     using c0_4unity_chessname;
     using WeChatWASM;
     using UnityEngine.Networking;
+
     // import c0_4unity_chess;
 
     // // This is the main scripting part...
@@ -80,9 +81,9 @@
     // var promo2Knight = false;
     public bool promo2Knight = false;
 
-      private WXUserInfoButton infoButton;
-
-      public UserData userData = new UserData();
+    private WXUserInfoButton infoButton;
+    public WXBannerAd BannerAd;
+    public UserData userData = new UserData();
 
       // public Text txtUserInfo;
 
@@ -262,13 +263,16 @@ c2.enabled = false;
 
 
 
-
+       
 
 
 
 
         WX.InitSDK((int code) =>
         {
+
+            CreateBannerAd();
+            ShowBannerAd();
             Color c = avartarImage.color;
             c.a = 0;
             avartarImage.color = c;
@@ -366,7 +370,8 @@ c2.enabled = false;
                         //start game.
 
                        LandingP = true;
-                        showButton = false;   
+                        showButton = false;
+                        HideBannerAd();
                         ActivateCamera(true);
                         infoButton.Destroy();
 
@@ -1380,13 +1385,28 @@ private IEnumerator PostRequest(string url, string jsonBody)
            
         }
     }
-
-
-
-
-
-
+    private void CreateBannerAd()
+    {
+        BannerAd = WX.CreateFixedBottomMiddleBannerAd("adunit-9b9ac9c6867fd733", 30, 200);
     }
+
+    public void ShowBannerAd()
+    {
+        BannerAd.Show();
+    }
+
+    public void HideBannerAd()
+    {
+        BannerAd.Hide();
+    }
+
+    public void DestroyBannerAd()
+    {
+        BannerAd.Destroy();
+    }
+
+
+}
 
 
     public class UserData
