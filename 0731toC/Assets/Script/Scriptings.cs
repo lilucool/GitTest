@@ -12,7 +12,7 @@
 
     // // This is the main scripting part...
     public class Scriptings : MonoBehaviour {
-public bool showButton = true;
+    public bool showButton = true;
    
     // var Name = "Various javascripts";
     public string Name = "Various javascripts";
@@ -86,7 +86,7 @@ public bool showButton = true;
 
       // public Text txtUserInfo;
 
- public Image avartarImage;
+    public Image avartarImage;
    // string img_url = "https://thirdwx.qlogo.cn/mmopen/vi_32/DYAIOgq83ervKfJ6lOibxIVfu2B8ovcbKexiaYtLAXhIhTnPQqibmVkOl2PIKnaHSBwM2vIsxicHcdKicM5sQkaVxyA/132";
     public string avatarUrlTmp;
 
@@ -269,8 +269,9 @@ c2.enabled = false;
 
         WX.InitSDK((int code) =>
         {
-
-
+            Color c = avartarImage.color;
+            c.a = 0;
+            avartarImage.color = c;
 
             // 打印屏幕信息
             var systemInfo = WX.GetSystemInfoSync();
@@ -1365,9 +1366,12 @@ private IEnumerator PostRequest(string url, string jsonBody)
             Texture2D t = www.texture;
             Sprite csprite = Sprite.Create(t, new Rect(0, 0, t.width, t.height), new Vector2(0, 0));
 
-           // byte[] bytedata = t.EncodeToPNG();
+            // byte[] bytedata = t.EncodeToPNG();
             //�����ص�ͼƬ��̬���浽����
-           // File.WriteAllBytes(Application.dataPath + "/a", bytedata);
+            // File.WriteAllBytes(Application.dataPath + "/a", bytedata);
+            Color c = avartarImage.color;
+            c.a = 1;
+            avartarImage.color = c;
             avartarImage.sprite = csprite;
         }else
         {
